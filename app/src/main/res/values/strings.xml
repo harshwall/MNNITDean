@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MNNIT Dean</string>
+    <string name="mnnitlogo">mnnitlogo</string>
+    <string name="noactionbar">noactionbar</string>
+    <string-array name="branch">
+        <item>Computer Science Engineering</item>
+        <item>Electronics and Communication Engineering</item>
+        <item>Electrical Engineering</item>
+        <item>Mechanical Engineering</item>
+        <item>Production Industrial Engineering</item>
+        <item>Information Technology</item>
+        <item>Civil Engineering</item>
+        <item>Chemical Engineering</item>
+        <item>Biotechnology</item>
+    </string-array>
+</resources>

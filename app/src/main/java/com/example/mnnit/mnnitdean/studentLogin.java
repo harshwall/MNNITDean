@@ -51,7 +51,7 @@ public class studentLogin extends AppCompatActivity {
                 dpd=new DatePickerDialog(studentLogin.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int myear, int mmonth, int mday) {
-                        textView.setText("   DOB:"+mday+"/"+mmonth+1+"/"+myear);
+                        textView.setText("   DOB:"+mday+"/"+(mmonth+1)+"/"+myear);
 
                     }
                 },year,month,day);

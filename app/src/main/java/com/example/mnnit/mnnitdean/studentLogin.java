@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,9 +21,10 @@ import java.util.Locale;
 
 public class studentLogin extends AppCompatActivity {
 
-    ImageButton dob=(ImageButton)findViewById(R.id.dob);
-    TextView text3=(TextView)findViewById(R.id.text3);
-    Calendar calendar;
+  TextView textView;
+  ImageButton dob;
+  Calendar calendar;
+  DatePickerDialog dpd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,25 +36,30 @@ public class studentLogin extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         branch.setAdapter(adapter);
 
-        dob.setOnClickListener(new View.OnClickListener()){
+
+        textView=(TextView)findViewById(R.id.text3);
+        dob=(ImageButton)findViewById(R.id.dob);
+
+        dob.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                calendar = Calendar.getInstance();
-                int year=calendar.get(Calendar.YEAR);
-                int month=calendar.get(Calendar.MONTH);
+            public void onClick(View v) {
+                calendar=Calendar.getInstance();
                 int day=calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog=new DatePickerDialog(studentLogin.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                text3.setText(day+"/"+month+"/"+year);
-                            }
-                        },year,month,day);
-                datePickerDialog.show();
+                int month=calendar.get(Calendar.MONTH);
+                int year=calendar.get(Calendar.YEAR);
 
+                dpd=new DatePickerDialog(studentLogin.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int myear, int mmonth, int mday) {
+                        textView.setText("   DOB:"+mday+"/"+mmonth+1+"/"+myear);
 
+                    }
+                },year,month,day);
+                dpd.show();
             }
-        };
+        });
+
+
 
 
     }

@@ -31,7 +31,6 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-
         android:onClick="buttonClicked"
         android:textStyle="bold"
         android:background="#FFFFFF"

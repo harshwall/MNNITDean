@@ -13,4 +13,5 @@
         <item>Chemical Engineering</item>
         <item>Biotechnology</item>
     </string-array>
+    <string name="title_activity_signup">signup</string>
 </resources>

@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonClicked(View v){
+        finish();
         SharedPreferences sharedPreferences = getSharedPreferences("loginType", 0);
         String logintype = sharedPreferences.getString("logintype", "N/A");
         if (logintype.equals("N/A"))
@@ -26,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this,teacherLogin.class));
         else if(logintype.equals("Student"))
             startActivity(new Intent(this,studentLogin.class));
+
     }
 
 
-//        SharedPreferences.Editor editor=sharedPreferences.edit();
+
+    //        SharedPreferences.Editor editor=sharedPreferences.edit();
 
 
 }

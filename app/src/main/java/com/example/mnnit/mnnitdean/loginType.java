@@ -13,9 +13,14 @@ public class loginType extends AppCompatActivity {
         setContentView(R.layout.activity_login_type);
     }
 
-    public void studentClicked(View v){
-        Intent intent= new Intent(this,studentLogin.class);
+    public void loginclicked(View v){
+
+    }
+    public void signupclicked(View v){
+        Intent intent=new Intent(this,signup.class);
         startActivity(intent);
 
     }
+
+
 }

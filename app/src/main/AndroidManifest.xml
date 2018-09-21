@@ -17,8 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".loginType" />
-        <activity android:name=".teacherLogin" />
-        <activity android:name=".studentLogin"></activity>
+        <activity
+            android:name=".signup"
+            android:label="@string/title_activity_signup"></activity>
     </application>
 
 </manifest>

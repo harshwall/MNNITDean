@@ -1,25 +1,18 @@
 package com.example.mnnit.mnnitdean;
 
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.Activity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
-public class studentLogin extends AppCompatActivity {
+public class signup extends Activity {
 
     TextView textView;
     ImageButton dob;
@@ -29,13 +22,12 @@ public class studentLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_login);
-
+        setContentView(R.layout.activity_signup);
+//Creates a list of branches using array adapter
         Spinner branch = findViewById(R.id.branch);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.branch, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         branch.setAdapter(adapter);
-
 
         textView=(TextView)findViewById(R.id.text3);
         dob=(ImageButton)findViewById(R.id.dob);
@@ -47,11 +39,11 @@ public class studentLogin extends AppCompatActivity {
                 int day=calendar.get(Calendar.DAY_OF_MONTH);
                 int month=calendar.get(Calendar.MONTH);
                 int year=calendar.get(Calendar.YEAR);
-
-                dpd=new DatePickerDialog(studentLogin.this, new DatePickerDialog.OnDateSetListener() {
+//calendar dialog implementation
+                dpd=new DatePickerDialog(signup.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int myear, int mmonth, int mday) {
-                        textView.setText("   DOB:"+mday+"/"+(mmonth+1)+"/"+myear);
+                        textView.setText("Date of BIrth:"+mday+"/"+(mmonth+1)+"/"+myear);
 
                     }
                 },year,month,day);
@@ -60,11 +52,6 @@ public class studentLogin extends AppCompatActivity {
         });
 
 
-
-
     }
-
-
-
 
 }

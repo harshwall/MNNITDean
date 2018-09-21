@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="This is the Sign up page. Please fill all the details correctly."
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Enter your Name:"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text1"
+        android:gravity="center"
+        android:hint="Enter name here" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Enter Father's Name:"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/father"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter name here" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:text=" Enter your Registration No."
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/regno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter here" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="302dp"
+            android:layout_height="49dp"
+            android:gravity="center_vertical"
+            android:text=" Set Date of Birth"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/dob"
+            android:layout_width="49dp"
+            android:layout_height="45dp"
+            android:src="@android:drawable/ic_menu_my_calendar" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Select branch"
+        android:textSize="20dp"/>
+
+
+        <Spinner
+        android:id="@+id/branch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textAlignment="center"></Spinner>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Enter your email"
+        android:textSize="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter email here"
+        android:id="@+id/email"
+        android:gravity="center"/>
+</LinearLayout>
+
+
+

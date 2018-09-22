@@ -31,11 +31,14 @@ public class studentlogin extends AppCompatActivity {
                         menuItem.setChecked(false);
                         int id=menuItem.getItemId();
                         switch (id){
-                            case R.id.notice:;
-                            case R.id.profile:;
-                            case R.id.calendar:;
-                            case R.id.downloads:;
-                            case R.id.fee:;
+                            case R.id.notice:break;
+                            case R.id.profile:
+                                Intent intent=new Intent(studentlogin.this,profileStudent.class);
+                                startActivity(intent);
+                                break;
+                            case R.id.calendar:break;
+                            case R.id.downloads:break;
+                            case R.id.fee:break;
                         }
 
                         return true;

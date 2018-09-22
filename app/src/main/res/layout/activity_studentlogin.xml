@@ -13,49 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="HEllo"
-            android:textSize="30dp"/>
+
     </LinearLayout>
     </ScrollView>
     <android.support.design.widget.NavigationView

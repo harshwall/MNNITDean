@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".profileStudent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
   <ImageView
@@ -20,4 +23,77 @@
         android:id="@+id/changepic"
         android:text="Change picture"
         android:layout_gravity="center"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:id="@+id/name"
+      android:layout_gravity="center"
+      android:gravity="center"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:id="@+id/regno"
+      android:gravity="center"
+      android:layout_gravity="center"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:id="@+id/dob"
+      android:gravity="center"
+      android:layout_gravity="center"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:id="@+id/gender"
+      android:gravity="center"
+      android:layout_gravity="center"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:id="@+id/email"
+      android:gravity="center"
+      android:layout_gravity="center"
+      />
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:text="Editable deatils"
+      android:textStyle="bold"
+      android:layout_gravity="center"
+      android:textSize="25dp"
+      android:gravity="center"/>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile no."
+        android:textSize="20dp"
+        android:layout_gravity="center_vertical"/>
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:id="@+id/mobile"
+      android:inputType="number"/>
+  </LinearLayout>
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:text="Submit"/>
+
+
+
 </LinearLayout>
+</ScrollView>

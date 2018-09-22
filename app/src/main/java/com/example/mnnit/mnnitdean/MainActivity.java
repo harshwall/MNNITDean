@@ -13,22 +13,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Thread background=new Thread(){
+            public void run(){
+                try{
+                    SharedPreferences sharedPreferences = getSharedPreferences("loginType", 0);
+                    String logintype = sharedPreferences.getString("logintype", "N/A");
+                    sleep(2000);
+                    finish();
+                    Intent intent=new Intent(getBaseContext(),login.class);
+                    startActivity(intent);
+                }catch (Exception e){
+
+                }
+            }
+
+        };
+        background.start();
 
 
     }
 
-    public void buttonClicked(View v){
-        finish();
-        SharedPreferences sharedPreferences = getSharedPreferences("loginType", 0);
-        String logintype = sharedPreferences.getString("logintype", "N/A");
-        if (logintype.equals("N/A"))
-            startActivity(new Intent(this, login.class));
+
+
+//        if (logintype.equals("N/A"))
+//            startActivity(new Intent(this, login.class));
 //        else if(logintype.equals("Teacher"))
 //            startActivity(new Intent(this,teacherLogin.class));
 //        else if(logintype.equals("Student"))
 //            startActivity(new Intent(this,studentLogin.class));
 
-    }
+
+
 
 
 

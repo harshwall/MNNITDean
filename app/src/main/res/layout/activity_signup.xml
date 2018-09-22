@@ -111,6 +111,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text=" Enter your Mobile no."
+        android:textSize="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter mobile no."
+        android:id="@+id/mobile"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="10"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text=" Enter your email"
         android:textSize="20dp"/>
     <EditText

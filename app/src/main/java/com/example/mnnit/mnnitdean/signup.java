@@ -32,7 +32,7 @@ public class signup extends Activity {
     DatabaseReference rootreference;
     ProgressDialog progressDialog;
 
-    EditText e1,e2,e3,e4,e5,e6;
+    EditText e1,e2,e3,e4,e5,e6,e7;
 
 
     String dateob,stream;
@@ -84,6 +84,7 @@ public class signup extends Activity {
         e4=(EditText)findViewById(R.id.email);
         e5=(EditText)findViewById(R.id.pass);
         e6=(EditText)findViewById(R.id.pass2);
+        e7=(EditText)findViewById(R.id.mobile);
 
         progressDialog=new ProgressDialog(this);
     }
@@ -93,9 +94,10 @@ public class signup extends Activity {
         final String email = e4.getText().toString();
         final String password = e5.getText().toString();
         int a=e3.getText().toString().length();
+        int b=e7.getText().toString().length();
         //Toast.makeText(getApplicationContext(),a+" "+e3.getText().toString(),Toast.LENGTH_SHORT).show();
 
-        if(e1.getText().toString().equals("") ||e2.getText().toString().equals("")||textView.getText().toString().equals(" Set Date of Birth")||a<8||e3.getText().toString().equals("")||e4.getText().toString().equals("")||e5.getText().toString().equals("")||e6.getText().toString().equals("")||!(e5.getText().toString().equals(e6.getText().toString()))||!Patterns.EMAIL_ADDRESS.matcher(e4.getText().toString()).matches()||e5.getText().toString().length()<6)
+        if(e1.getText().toString().equals("") ||e2.getText().toString().equals("")||textView.getText().toString().equals(" Set Date of Birth")||a<8||e3.getText().toString().equals("")||e4.getText().toString().equals("")||e5.getText().toString().equals("")||e6.getText().toString().equals("")||!(e5.getText().toString().equals(e6.getText().toString()))||!Patterns.EMAIL_ADDRESS.matcher(e4.getText().toString()).matches()||e5.getText().toString().length()<6||e7.getText().toString().equals("")||b<10)
         {
             if(e1.getText().toString().equals(""))
             {
@@ -141,7 +143,14 @@ public class signup extends Activity {
             {
                 e5.setError("Password too short");
             }
-
+            if(e7.getText().toString().equals(""))
+            {
+                e7.setError("Enter Mobile no.");
+            }
+            if(b<10)
+            {
+                e7.setError("Mobile no. incomplete");
+            }
         }
         else
         {
@@ -154,7 +163,7 @@ public class signup extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             user = auth.getCurrentUser();
-                            user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString());
+                            user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString(),e7.getText().toString());
                             rootreference.child("Profile:/"+user.getUid()).setValue(myuser)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

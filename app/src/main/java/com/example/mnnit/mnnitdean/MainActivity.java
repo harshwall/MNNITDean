@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         String logintype = sharedPreferences.getString("logintype", "N/A");
         if (logintype.equals("N/A"))
             startActivity(new Intent(this, loginType.class));
-        else if(logintype.equals("Teacher"))
-            startActivity(new Intent(this,teacherLogin.class));
-        else if(logintype.equals("Student"))
-            startActivity(new Intent(this,studentLogin.class));
+//        else if(logintype.equals("Teacher"))
+//            startActivity(new Intent(this,teacherLogin.class));
+//        else if(logintype.equals("Student"))
+//            startActivity(new Intent(this,studentLogin.class));
 
     }
 

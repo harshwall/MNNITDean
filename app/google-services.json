@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "527661312108",
+    "firebase_url": "https://mnnitdean-b7f65.firebaseio.com",
+    "project_id": "mnnitdean-b7f65",
+    "storage_bucket": "mnnitdean-b7f65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527661312108:android:7089110e525346e3",
+        "android_client_info": {
+          "package_name": "com.example.mnnit.mnnitdean"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527661312108-rc4taa648pn808npnm1m8evsd66i2lsj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mnnit.mnnitdean",
+            "certificate_hash": "6fbd73c5243e53eb35cdf61af296f166e82286e2"
+          }
+        },
+        {
+          "client_id": "527661312108-bf2lp02dflm08n40unr37aqps8kcmki0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJwL15Dc-iMBiTfL7-YXkvQMwv93L82Ns"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527661312108-bf2lp02dflm08n40unr37aqps8kcmki0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

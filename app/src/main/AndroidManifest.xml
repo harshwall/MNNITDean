@@ -30,9 +30,7 @@
             android:name=".login"
             android:label="@string/title_activity_login" />
         <activity android:name=".forgotpass" />
-        <activity
-            android:name=".studentlogin"
-            android:label="@string/title_activity_studentlogin"></activity>
+        <activity android:name=".studentlogin"></activity>
     </application>
 
 </manifest>

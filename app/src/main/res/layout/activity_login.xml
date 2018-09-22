@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".loginType">
+    tools:context=".login">
 
     <ImageView
         android:id="@+id/teacherLogin"
@@ -42,7 +42,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:inputType="textPassword"
-        android:hint="Enter password" />
+        android:hint="Enter Password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:text="Forgot Password? Click here!"
+        android:onClick="forgotpassclicked"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,16 +61,15 @@
         android:text="Login"
         android:id="@+id/login"
         android:onClick="loginclicked"/>
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_gravity="center"
+        android:text="Sign Up!"
         android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:text="New User? Click to SIGN UP!"
         android:id="@+id/signup"
-        android:onClick="signupclicked"/>
+        android:onClick="signupclicked"
+        android:layout_gravity="center"/>
+
 
 
 </LinearLayout>

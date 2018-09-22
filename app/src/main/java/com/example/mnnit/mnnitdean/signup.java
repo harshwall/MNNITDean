@@ -1,9 +1,12 @@
 package com.example.mnnit.mnnitdean;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.PatternMatcher;
 import android.support.annotation.NonNull;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -27,10 +30,12 @@ public class signup extends Activity {
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference rootreference;
+    ProgressDialog progressDialog;
 
-    EditText e1,e2,e3,e4,e5;
+    EditText e1,e2,e3,e4,e5,e6;
 
 
+    String dateob,stream;
     TextView textView;
     ImageButton dob;
     Calendar calendar;
@@ -45,6 +50,7 @@ public class signup extends Activity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.branch, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         branch.setAdapter(adapter);
+        stream=branch.getSelectedItem().toString();
 
         textView=(TextView)findViewById(R.id.text3);
         dob=(ImageButton)findViewById(R.id.dob);
@@ -61,6 +67,7 @@ public class signup extends Activity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int myear, int mmonth, int mday) {
                         textView.setText("Date of BIrth:"+mday+"/"+(mmonth+1)+"/"+myear);
+                        dateob=Integer.toString(mday)+"/"+Integer.toString(mmonth+1)+"/"+Integer.toString(myear);
 
                     }
                 },year,month,day);
@@ -76,42 +83,103 @@ public class signup extends Activity {
         e3=(EditText)findViewById(R.id.regno);
         e4=(EditText)findViewById(R.id.email);
         e5=(EditText)findViewById(R.id.pass);
+        e6=(EditText)findViewById(R.id.pass2);
 
+        progressDialog=new ProgressDialog(this);
     }
 
-    public void createUser(View v){
-        final String name=e1.getText().toString();
-        final String fathername=e2.getText().toString();
-        final String regno=e3.getText().toString();
-        final String email=e4.getText().toString();
-        final String password=e5.getText().toString();
+    public void createUser(View v) {
 
-        auth.createUserWithEmailAndPassword(email,password)
+        final String email = e4.getText().toString();
+        final String password = e5.getText().toString();
+        int a=e3.getText().toString().length();
+        //Toast.makeText(getApplicationContext(),a+" "+e3.getText().toString(),Toast.LENGTH_SHORT).show();
+
+        if(e1.getText().toString().equals("") ||e2.getText().toString().equals("")||textView.getText().toString().equals(" Set Date of Birth")||a<8||e3.getText().toString().equals("")||e4.getText().toString().equals("")||e5.getText().toString().equals("")||e6.getText().toString().equals("")||!(e5.getText().toString().equals(e6.getText().toString()))||!Patterns.EMAIL_ADDRESS.matcher(e4.getText().toString()).matches()||e5.getText().toString().length()<6)
+        {
+            if(e1.getText().toString().equals(""))
+            {
+                e1.setError("Enter name");
+            }
+            if(e2.getText().toString().equals(""))
+            {
+                e2.setError("Enter Father's name");
+            }
+            if(e3.getText().toString().equals(""))
+            {
+                e3.setError("Enter Registration no.");
+            }
+            if(a<8)
+            {
+                e3.setError("Length is less than eight");
+            }
+            if(e4.getText().toString().equals(""))
+            {
+                e4.setError("Enter email");
+            }
+            if(e5.getText().toString().equals(""))
+            {
+                e5.setError("Enter password");
+            }
+            if(e6.getText().toString().equals(""))
+            {
+                e6.setError("Confirm password");
+            }
+            if(textView.getText().toString().equals(" Set Date of Birth"))
+            {
+                textView.setError("Select Date of Birth");
+            }
+            if(!(e5.getText().toString().equals(e6.getText().toString())))
+            {
+                e6.setError("Passwords do not match");
+            }
+            if(!Patterns.EMAIL_ADDRESS.matcher(e4.getText().toString()).matches())
+            {
+                e4.setError("Type correct email");
+            }
+            if(e5.getText().toString().length()<6)
+            {
+                e5.setError("Password too short");
+            }
+
+        }
+        else
+        {
+            progressDialog.setMessage("Registering, Please wait");
+            progressDialog.show();
+
+            auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful())
-                        {
-                            user=auth.getCurrentUser();
-                            user myuser=new user(e1.getText().toString(),e2.getText().toString(),e3.getText().toString(),e4.getText().toString());
-                            rootreference.child(user.getUid()).setValue(myuser)
+                        if (task.isSuccessful()) {
+                            user = auth.getCurrentUser();
+                            user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString());
+                            rootreference.child("Profile:/"+user.getUid()).setValue(myuser)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful())
-                                            {
-                                                Toast.makeText(getApplicationContext(),"DONE",Toast.LENGTH_SHORT).show();
-                                            }
-                                            else{
-                                                Toast.makeText(getApplicationContext(),"ERROR",Toast.LENGTH_SHORT).show();
+                                            if (task.isSuccessful()) {
+                                                progressDialog.dismiss();
+                                                finish();
+                                                Toast.makeText(getApplicationContext(), "Registered. Wait for approval by Admin", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                progressDialog.dismiss();
+                                                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
 
                                             }
                                         }
                                     });
                         }
+                        else
+                        {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(),"User cannot be created",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
+        }
     }
 
 }

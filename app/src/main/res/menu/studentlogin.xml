@@ -17,4 +17,7 @@
     <item
         android:id="@+id/fee"
         android:title="Fee Structure"/>
+    <item
+        android:id="@+id/signout"
+        android:title="Sign Out"/>
 </menu>

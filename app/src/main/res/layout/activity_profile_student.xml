@@ -11,46 +11,68 @@
     android:orientation="vertical">
 
 
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Profile"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:textSize="30dp"
+      android:layout_marginTop="10dp"/>
   <ImageView
       android:layout_width="100dp"
       android:layout_height="150dp"
       android:layout_marginTop="20dp"
       android:layout_gravity="center"
-      android:id="@+id/pic"/>
+      android:id="@+id/pic"
+      app:srcCompat="@mipmap/ic_launcher"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/changepic"
         android:text="Change picture"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:onClick="openGallery"/>
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
       android:id="@+id/name"
       android:layout_gravity="center"
-      android:gravity="center"/>
+      android:gravity="center"
+      android:textSize="20dp"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:id="@+id/fathername"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:textSize="20dp"/>
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
       android:id="@+id/regno"
       android:gravity="center"
-      android:layout_gravity="center"/>
+      android:layout_gravity="center"
+      android:textSize="20dp"/>
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
       android:id="@+id/dob"
       android:gravity="center"
-      android:layout_gravity="center"/>
+      android:layout_gravity="center"
+      android:textSize="20dp"/>
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
       android:id="@+id/gender"
       android:gravity="center"
-      android:layout_gravity="center"/>
+      android:layout_gravity="center"
+      android:textSize="20dp"/>
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -58,7 +80,8 @@
       android:id="@+id/email"
       android:gravity="center"
       android:layout_gravity="center"
-      />
+      android:textSize="20dp"/>
+
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -84,14 +107,16 @@
       android:layout_gravity="center"
       android:gravity="center"
       android:id="@+id/mobile"
-      android:inputType="number"/>
+      android:inputType="number"
+      android:maxLength="10"/>
   </LinearLayout>
   <Button
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:gravity="center"
-      android:text="Submit"/>
+      android:text="Submit"
+      android:onClick="submit"/>
 
 
 

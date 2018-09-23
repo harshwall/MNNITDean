@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,9 +34,10 @@ public class signup extends Activity {
     ProgressDialog progressDialog;
 
     EditText e1,e2,e3,e4,e5,e6,e7;
+    RadioButton male,female,other;
 
 
-    String dateob,stream;
+    String dateob,stream,gender;
     TextView textView;
     ImageButton dob;
     Calendar calendar;
@@ -76,6 +78,7 @@ public class signup extends Activity {
         });
 
 
+        //intializing variables
         auth=FirebaseAuth.getInstance();
         rootreference= FirebaseDatabase.getInstance().getReference();
         e1=(EditText)findViewById(R.id.name);
@@ -85,18 +88,30 @@ public class signup extends Activity {
         e5=(EditText)findViewById(R.id.pass);
         e6=(EditText)findViewById(R.id.pass2);
         e7=(EditText)findViewById(R.id.mobile);
-
+        male=(RadioButton)findViewById(R.id.male);
+        female=(RadioButton)findViewById(R.id.female);
+        other=(RadioButton)findViewById(R.id.other);
         progressDialog=new ProgressDialog(this);
     }
 
+
+    //uploading data
     public void createUser(View v) {
 
         final String email = e4.getText().toString();
         final String password = e5.getText().toString();
+
         int a=e3.getText().toString().length();
         int b=e7.getText().toString().length();
         //Toast.makeText(getApplicationContext(),a+" "+e3.getText().toString(),Toast.LENGTH_SHORT).show();
+        if(male.isChecked())
+            gender="Male";
+        else if(female.isChecked())
+            gender="Female";
+        else if(other.isChecked())
+            gender="Other";
 
+//check if any field is blank or contains incorrect data
         if(e1.getText().toString().equals("") ||e2.getText().toString().equals("")||textView.getText().toString().equals(" Set Date of Birth")||a<8||e3.getText().toString().equals("")||e4.getText().toString().equals("")||e5.getText().toString().equals("")||e6.getText().toString().equals("")||!(e5.getText().toString().equals(e6.getText().toString()))||!Patterns.EMAIL_ADDRESS.matcher(e4.getText().toString()).matches()||e5.getText().toString().length()<6||e7.getText().toString().equals("")||b<10)
         {
             if(e1.getText().toString().equals(""))
@@ -163,7 +178,7 @@ public class signup extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             user = auth.getCurrentUser();
-                            user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString(),e7.getText().toString());
+                            user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString(),e7.getText().toString(),gender,"-1");
                             rootreference.child("Profile:/"+user.getUid()).setValue(myuser)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

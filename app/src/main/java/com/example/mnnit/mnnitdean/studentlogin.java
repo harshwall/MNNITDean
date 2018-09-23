@@ -39,6 +39,7 @@ public class studentlogin extends AppCompatActivity {
                             case R.id.calendar:break;
                             case R.id.downloads:break;
                             case R.id.fee:break;
+                            case R.id.signout:break;
                         }
 
                         return true;

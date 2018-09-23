@@ -31,7 +31,8 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".forgotpass" />
         <activity android:name=".studentlogin" />
-        <activity android:name=".profileStudent"></activity>
+        <activity android:name=".profileStudent" />
+        <activity android:name=".signupflag"></activity>
     </application>
 
 </manifest>

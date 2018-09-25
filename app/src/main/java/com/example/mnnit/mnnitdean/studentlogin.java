@@ -11,15 +11,20 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class studentlogin extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
+    FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentlogin);
+        auth=FirebaseAuth.getInstance();
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
         NavigationView navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -39,7 +44,12 @@ public class studentlogin extends AppCompatActivity {
                             case R.id.calendar:break;
                             case R.id.downloads:break;
                             case R.id.fee:break;
-                            case R.id.signout:break;
+                            case R.id.signout:
+                                auth.signOut();
+                                finish();
+                                Intent i=new Intent(studentlogin.this,loginType.class);
+                                startActivity(i);
+                                break;
                         }
 
                         return true;

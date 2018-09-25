@@ -32,7 +32,9 @@
         <activity android:name=".forgotpass" />
         <activity android:name=".studentlogin" />
         <activity android:name=".profileStudent" />
-        <activity android:name=".signupflag"></activity>
+        <activity android:name=".signupflag" />
+        <activity android:name=".adminLogin" />
+        <activity android:name=".adminActivity"></activity>
     </application>
 
 </manifest>

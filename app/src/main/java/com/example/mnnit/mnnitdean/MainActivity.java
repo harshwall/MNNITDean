@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     SharedPreferences sharedPreferences = getSharedPreferences("loginType", 0);
                     String logintype = sharedPreferences.getString("logintype", "N/A");
-                    sleep(2000);
+                    sleep(1000);
                     finish();
-                    Intent intent=new Intent(getBaseContext(),login.class);
+                    Intent intent=new Intent(getBaseContext(),loginType.class);
                     startActivity(intent);
                 }catch (Exception e){
 

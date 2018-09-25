@@ -28,27 +28,30 @@ public class forgotpass extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
     }
     public void resetclicked(View view){
-        progressDialog.setMessage("Sending reset request");
-        progressDialog.show();
         String email=e.getText().toString();
-        auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                        {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),"Password reset link sent to your email",Toast.LENGTH_LONG).show();
-                            finish();
+        if(email.length()!=0) {
+            progressDialog.setMessage("Sending reset request");
+            progressDialog.show();
+        }
+        if(email.length()!=0) {
+            auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Password reset link sent to your email", Toast.LENGTH_LONG).show();
+                                finish();
 
+                            } else {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "User not found", Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else
-                        {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),"User not found",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                    });
+        }
+        else
+            e.setError("Enter email");
 
 
     }

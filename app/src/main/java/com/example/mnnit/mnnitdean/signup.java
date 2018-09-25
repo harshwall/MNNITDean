@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.app.Activity;
-import android.os.PatternMatcher;
 import android.support.annotation.NonNull;
 import android.util.Patterns;
 import android.view.View;
@@ -68,7 +67,7 @@ public class signup extends Activity {
                 dpd=new DatePickerDialog(signup.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int myear, int mmonth, int mday) {
-                        textView.setText("Date of BIrth:"+mday+"/"+(mmonth+1)+"/"+myear);
+                        textView.setText("Date of Birth:"+mday+"/"+(mmonth+1)+"/"+myear);
                         dateob=Integer.toString(mday)+"/"+Integer.toString(mmonth+1)+"/"+Integer.toString(myear);
 
                     }
@@ -93,6 +92,7 @@ public class signup extends Activity {
         other=(RadioButton)findViewById(R.id.other);
         progressDialog=new ProgressDialog(this);
     }
+
 
 
     //uploading data
@@ -178,15 +178,17 @@ public class signup extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             user = auth.getCurrentUser();
+                            uid myuid=new uid(user.getUid().toString());
                             user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString(),e7.getText().toString(),gender,"-1");
+                            rootreference.child("uid:/"+e3.getText().toString()).setValue(myuid);
                             rootreference.child("Profile:/"+user.getUid()).setValue(myuser)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 progressDialog.dismiss();
-                                                finish();
                                                 Toast.makeText(getApplicationContext(), "Registered. Wait for approval by Admin", Toast.LENGTH_SHORT).show();
+                                                finish();
                                             } else {
                                                 progressDialog.dismiss();
                                                 Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();

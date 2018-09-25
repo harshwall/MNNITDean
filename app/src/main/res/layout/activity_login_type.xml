@@ -8,59 +8,40 @@
     tools:context=".loginType">
 
     <ImageView
-        android:id="@+id/teacherLogin"
+        android:id="@+id/adminLogin"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/mnnit_logo" />
+        android:layout_marginTop="60dp"
+        android:src="@drawable/admin"
+        android:onClick="adminClicked"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
+        android:text="Admin"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:layout_marginLeft="10dp"/>
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:inputType="textEmailAddress"
-        android:hint="Enter email"/>
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"/>
+    <ImageView
+        android:id="@+id/studentLogin"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/student_icon"
+        android:onClick="studentClicked"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="Student"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
-        android:layout_marginLeft="10dp"/>
-    <EditText
-        android:id="@+id/pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:inputType="textPassword"
-        android:hint="Enter password" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:text="Login"
-        android:id="@+id/login"
-        android:onClick="loginclicked"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:text="New User? Click to SIGN UP!"
-        android:id="@+id/signup"
-        android:onClick="signupclicked"/>
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"/>
+
 
 
 </LinearLayout>

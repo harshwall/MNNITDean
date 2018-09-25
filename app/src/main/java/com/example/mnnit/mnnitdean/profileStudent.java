@@ -53,63 +53,58 @@ public class profileStudent extends AppCompatActivity {
         t6=(TextView)findViewById(R.id.fathername);
         mobile=(EditText)findViewById(R.id.mobile);
         il=(ImageView)findViewById(R.id.pic);
-        dialog=new ProgressDialog(this);
-        dialog.setMessage("Please wait");
-        dialog.show();
+
         //inisializing variables
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Profile:/"+user.getUid());
         storageReference= FirebaseStorage.getInstance().getReference().child("Image");
         pathreference=storageReference.child("Image/"+user.getUid()+".jpg");
-
-
+        //dialog opens
+        dialog=new ProgressDialog(this);
+        dialog.setMessage("Please wait");
+        dialog.show();
 
         //fetching data
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                user prin = dataSnapshot.getValue(user.class);
-                t1.setText("Name:  " + prin.name);
-                t2.setText("Registration No:  " + prin.regno);
-                t3.setText("Date of Birth:  " + prin.dob);
-                t4.setText("Gender:  "+prin.gender);
-                t6.setText("Father's Name:  " + prin.fathername);
-                t5.setText("Email:  " + prin.email);
-                mobile.setText(prin.mobile);
-                dialog.dismiss();
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        Runnable runnable = new Runnable() {
-            @Override
+        new Thread(new Runnable() {
             public void run() {
-                // code that needs 6 seconds for execution
-                //fetching image
+                // a potentially  time consuming task
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        user prin = dataSnapshot.getValue(user.class);
+                        t1.setText("Name:  " + prin.name);
+                        t2.setText("Registration No:  " + prin.regno);
+                        t3.setText("Date of Birth:  " + prin.dob);
+                        t4.setText("Gender:  "+prin.gender);
+                        t6.setText("Father's Name:  " + prin.fathername);
+                        t5.setText("Email:  " + prin.email);
+                        mobile.setText(prin.mobile);
+                        dialog.dismiss();
 
-                storageReference.child(user.getUid()+".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        new imageLoadTask(uri.toString(),il).execute();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Upload an image",Toast.LENGTH_SHORT).show();
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
-                // after finishing, close the progress bar
-
             }
-        };
+        }).start();
 
-        new Thread(runnable).start();
+//fetching image
+
+        storageReference.child(user.getUid()+".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                new imageLoadTask(uri.toString(),il).execute();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Upload an image",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
@@ -158,7 +153,7 @@ public class profileStudent extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
         }
     }
-
+//submit button
 
     public void submit(View v){
         String mob=mobile.getText().toString();

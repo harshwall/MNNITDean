@@ -21,8 +21,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -36,7 +39,7 @@ public class signup extends Activity {
     RadioButton male,female,other;
 
 
-    String dateob,stream,gender;
+    String dateob,stream,gender,s;
     TextView textView;
     ImageButton dob;
     Calendar calendar;
@@ -181,6 +184,19 @@ public class signup extends Activity {
                             uid myuid=new uid(user.getUid().toString());
                             user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString(),e7.getText().toString(),gender,"-1");
                             rootreference.child("uid:/"+e3.getText().toString()).setValue(myuid);
+                            rootreference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    request r=dataSnapshot.getValue(request.class);
+                                    s=r.request;
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                            rootreference.child("request").setValue(e3.getText().toString()+"+"+s);
                             rootreference.child("Profile:/"+user.getUid()).setValue(myuser)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +29,7 @@ public class adminLogin extends AppCompatActivity {
     EditText email,pass;
     ProgressDialog progressDialog;
     DatabaseReference databaseReference;
+    ImageButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,22 @@ public class adminLogin extends AppCompatActivity {
         email=(EditText)findViewById(R.id.email);
         pass=(EditText)findViewById(R.id.pass);
         progressDialog=new ProgressDialog(this);
+        button=(ImageButton)findViewById(R.id.hide);
+
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        pass.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        pass.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+                }
+                return true;
+            }
+        });
     }
     public void loginClicked(View v){
         if(email.getText().toString().equals("")||pass.getText().toString().equals(""))

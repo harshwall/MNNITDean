@@ -55,13 +55,28 @@
             android:layout_marginTop="20dp"
             android:textSize="20dp"
             android:layout_marginLeft="10dp"/>
-        <EditText
-            android:id="@+id/pass"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:inputType="textPassword"
-            android:hint="Enter Password" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Enter Password"
+                android:inputType="textPassword" />
+
+            <ImageButton
+                android:id="@+id/hide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/eye" />
+
+        </RelativeLayout>
 
         <Button
             android:layout_width="wrap_content"

@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +25,7 @@ public class login extends Activity {
     FirebaseUser user;
     EditText email,pass;
     ProgressDialog progressDialog;
+    ImageButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,23 @@ public class login extends Activity {
         email=(EditText)findViewById(R.id.email);
         pass=(EditText)findViewById(R.id.pass);
         progressDialog=new ProgressDialog(this);
+        button=(ImageButton)findViewById(R.id.hide);
+
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        pass.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        pass.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+                }
+                return true;
+            }
+        });
+
     }
     public void loginclicked(View v){
         if(email.getText().toString().equals("")||pass.getText().toString().equals(""))
@@ -77,6 +99,8 @@ public class login extends Activity {
         intent.putExtra("id",email.getText().toString());
         startActivity(intent);
     }
+
+
 
 
 }

@@ -30,7 +30,7 @@ public class adminActivity extends AppCompatActivity {
         recyclerView=(RecyclerView)findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         rootreference= FirebaseDatabase.getInstance().getReference();
-        rootreference.child("Profile:").addValueEventListener(new ValueEventListener() {
+        rootreference.child("Profile:").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren())

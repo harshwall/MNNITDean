@@ -40,8 +40,16 @@ public class program extends RecyclerView.Adapter{
 
         final user prin=arrayList.get(i);
         final holder newHolder=(holder)viewHolder;
-        newHolder.t1.setText(prin.name);
-        newHolder.t2.setText(prin.regno);
+        newHolder.t1.setText("Name : "+prin.name);
+        newHolder.t2.setText("Registeration No : "+prin.regno);
+        newHolder.t3.setText("Branch : "+prin.branch);
+        newHolder.t4.setText("Date of Birth : "+prin.dob);
+        newHolder.t5.setText("Father's Name : "+prin.fathername);
+        newHolder.t6.setText("Email : "+prin.email);
+        newHolder.t7.setText("Gender : "+prin.gender);
+        newHolder.t8.setText("Mobile No : "+prin.mobile);
+        final int p=i;
+
         newHolder.b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +62,10 @@ public class program extends RecyclerView.Adapter{
                             if(snapshot.child("regno").getValue().toString().equals(prin.regno))
                             {
                                 rootReference.child("Profile:/"+snapshot.getKey().toString()).child("flag").setValue("1");
+                                arrayList.remove(p);
+                                notifyItemRemoved(p);
+                                notifyItemRangeChanged(p,arrayList.size());
+
                                 return;
                             }
 
@@ -73,6 +85,43 @@ public class program extends RecyclerView.Adapter{
 
             }
         });
+
+        newHolder.b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rootReference.child("Profile:").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot snapshot:dataSnapshot.getChildren())
+                        {
+
+                            if(snapshot.child("regno").getValue().toString().equals(prin.regno))
+                            {
+                                rootReference.child("Profile:/"+snapshot.getKey().toString()).child("flag").setValue("0");
+                                arrayList.remove(p);
+                                notifyItemRemoved(p);
+                                notifyItemRangeChanged(p,arrayList.size());
+                                return;
+                            }
+
+
+
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+            }
+        });
+
+
     }
 
     @Override
@@ -81,16 +130,23 @@ public class program extends RecyclerView.Adapter{
     }
 
     public class holder extends RecyclerView.ViewHolder {
-        TextView t1,t2;
+        TextView t1,t2,t3,t4,t5,t6,t7,t8;
         Button b1,b2;
         public holder(@NonNull View itemView) {
             super(itemView);
-            t1=(TextView)itemView.findViewById(R.id.regno);
-            t2=(TextView)itemView.findViewById(R.id.name);
+            t1=(TextView)itemView.findViewById(R.id.name);
+            t2=(TextView)itemView.findViewById(R.id.regno);
+            t3=(TextView)itemView.findViewById(R.id.branch);
+            t4=(TextView)itemView.findViewById(R.id.dob);
+            t5=(TextView)itemView.findViewById(R.id.fname);
+            t6=(TextView)itemView.findViewById(R.id.email);
+            t7=(TextView)itemView.findViewById(R.id.gender);
+            t8=(TextView)itemView.findViewById(R.id.mobile);
             b1=(Button)itemView.findViewById(R.id.accept);
             b2=(Button)itemView.findViewById(R.id.reject);
 
         }
     }
+
 
 }

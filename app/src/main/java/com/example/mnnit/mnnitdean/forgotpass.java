@@ -26,6 +26,8 @@ public class forgotpass extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         e=(EditText)findViewById(R.id.email);
         progressDialog=new ProgressDialog(this);
+        Bundle extras=getIntent().getExtras();
+        e.setText(extras.getString("email"));
     }
     public void resetclicked(View view){
         String email=e.getText().toString();

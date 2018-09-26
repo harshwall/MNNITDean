@@ -95,8 +95,7 @@ public class login extends Activity {
     public void forgotpassclicked(View v){
 
         Intent intent=new Intent(this,forgotpass.class);
-        //intent.putExtra("email",email.getText().toString());
-        intent.putExtra("id",email.getText().toString());
+        intent.putExtra("email",email.getText().toString());
         startActivity(intent);
     }
 

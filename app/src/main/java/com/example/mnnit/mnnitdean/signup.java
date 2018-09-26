@@ -101,6 +101,7 @@ public class signup extends Activity {
     //uploading data
     public void createUser(View v) {
 
+
         final String email = e4.getText().toString();
         final String password = e5.getText().toString();
 
@@ -194,7 +195,12 @@ public class signup extends Activity {
                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                         request r = dataSnapshot.getValue(request.class);
                                                         s = r.request;
-                                                        rootreference.child("request").setValue(e3.getText().toString() + "+" + s);
+                                                        if(s==null)
+                                                        {
+                                                            rootreference.child("request").setValue(e3.getText().toString()+"+");
+                                                        }
+                                                        else
+                                                            rootreference.child("request").setValue(e3.getText().toString() + "+" + s);
                                                         progressDialog.dismiss();
                                                         Toast.makeText(getApplicationContext(), "Registered. Wait for approval by Admin", Toast.LENGTH_SHORT).show();
                                                         finish();
@@ -225,6 +231,7 @@ public class signup extends Activity {
                 });
 
         }
+
     }
 
 }

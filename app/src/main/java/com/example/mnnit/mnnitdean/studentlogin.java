@@ -1,15 +1,18 @@
 package com.example.mnnit.mnnitdean;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -61,6 +64,32 @@ public class studentlogin extends AppCompatActivity {
         mToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        AlertDialog.Builder altdial=new AlertDialog.Builder(studentlogin.this);
+        altdial.setMessage("Do you want to quit?").setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        auth.signOut();
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        AlertDialog alert=altdial.create();
+        alert.setTitle("Dialog Header");
+        alert.show();
     }
 
     public boolean onOptionsItemSelected(MenuItem item)

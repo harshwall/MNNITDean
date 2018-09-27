@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Thread background=new Thread(){
             public void run(){
                 try{
-                    SharedPreferences sharedPreferences = getSharedPreferences("loginType", 0);
-                    String logintype = sharedPreferences.getString("logintype", "N/A");
+                    Intent intent=new Intent(getBaseContext(),loginType.class);
                     sleep(1000);
                     finish();
-                    Intent intent=new Intent(getBaseContext(),loginType.class);
                     startActivity(intent);
                 }catch (Exception e){
 

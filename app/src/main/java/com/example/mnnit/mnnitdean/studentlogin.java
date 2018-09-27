@@ -3,6 +3,7 @@ package com.example.mnnit.mnnitdean;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -128,6 +129,11 @@ public class studentlogin extends AppCompatActivity {
                                 break;
                             case R.id.signout:
                                 auth.signOut();
+                                SharedPreferences sharedPreferences=getSharedPreferences("loginType",0);
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putString("email","N/A");
+                                editor.putString("pass","N/A");
+                                editor.apply();
                                 finish();
                                 break;
                         }

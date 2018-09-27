@@ -3,6 +3,7 @@ package com.example.mnnit.mnnitdean;
 import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -98,6 +100,7 @@ public class login extends Activity {
                                         }
                                         else if(prin.flag.equals("1"))
                                         {
+
                                             progressDialog.dismiss();
                                             Intent intent=new Intent(login.this,studentlogin.class);
                                             startActivity(intent);
@@ -122,7 +125,13 @@ public class login extends Activity {
                                 Toast.makeText(getApplicationContext(),"User not found",Toast.LENGTH_SHORT).show();
                             }
                         }
-                    });
+                    })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
     }

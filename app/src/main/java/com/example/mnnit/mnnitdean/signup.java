@@ -192,33 +192,19 @@ public class signup extends AppCompatActivity {
                             user = auth.getCurrentUser();
                             uid myuid=new uid(user.getUid().toString());
                             user myuser = new user(e1.getText().toString(), e2.getText().toString(), e3.getText().toString(), dateob,stream,e4.getText().toString(),e7.getText().toString(),gender,"-1");
+                            result1 result_1=new result1("0","0","0","0");
+                            result2 result_2=new result2("0","0","0","0");
                             rootreference.child("uid:/"+e3.getText().toString()).setValue(myuid);
-                            rootreference.child("Profile:/"+user.getUid()).setValue(myuser)
+                            rootreference.child("Profile:/"+user.getUid()).setValue(myuser);
+                            rootreference.child("Result/Result1:/"+user.getUid()).setValue(result_1);
+                            rootreference.child("Result/Result2:/"+user.getUid()).setValue(result_2)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                rootreference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                        request r = dataSnapshot.getValue(request.class);
-                                                        s = r.request;
-                                                        if(s==null)
-                                                        {
-                                                            rootreference.child("request").setValue(e3.getText().toString()+"+");
-                                                        }
-                                                        else
-                                                            rootreference.child("request").setValue(e3.getText().toString() + "+" + s);
-                                                        progressDialog.dismiss();
-                                                        Toast.makeText(getApplicationContext(), "Registered. Wait for approval by Admin", Toast.LENGTH_SHORT).show();
-                                                        finish();
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                    }
-                                                });
+                                                progressDialog.dismiss();
+                                                Toast.makeText(getApplicationContext(), "Registered. Wait for approval by Admin", Toast.LENGTH_SHORT).show();
+                                                finish();
                                             } else {
                                                 progressDialog.dismiss();
                                                 Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();

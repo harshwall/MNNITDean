@@ -9,11 +9,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -24,16 +26,25 @@ import java.util.Random;
 public class upnotice extends AppCompatActivity {
 
     StorageReference storageReference;
+    FirebaseUser user;
+    FirebaseAuth auth;
     ProgressDialog dialog;
     Uri pdfUri;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upnotice);
         //init variables
+        auth=FirebaseAuth.getInstance();
+        user=auth.getCurrentUser();
         storageReference= FirebaseStorage.getInstance().getReference().child("Notice");
         dialog=new ProgressDialog(this);
+        webView=(WebView)findViewById(R.id.web);
+        webView.getSettings().setJavaScriptEnabled(true);
+        String pdf= "https://firebasestorage.googleapis.com/v0/b/mnnitdean-b7f65.appspot.com/o/AcademicCalander%2Facademiccalender.pdf?alt=media&token=3a1c081f-0cef-49d3-b1c0-3f4664499efc.pdf";
+        webView.loadUrl(pdf);
     }
 
 

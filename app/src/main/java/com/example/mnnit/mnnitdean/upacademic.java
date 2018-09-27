@@ -44,7 +44,7 @@ public class upacademic extends AppCompatActivity {
         if(requestCode==10&&resultCode==RESULT_OK&&data!=null)
         {
             pdfUri=data.getData();
-            StorageReference myref=storageReference.child("abc"+".pdf");
+            StorageReference myref=storageReference.child("academiccalender"+".pdf");
             dialog.setMessage("Uploading File");
             dialog.show();
             myref.putFile(pdfUri)

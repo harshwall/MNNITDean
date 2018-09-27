@@ -1,5 +1,6 @@
 package com.example.mnnit.mnnitdean;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,6 +57,11 @@ public class profileStudent extends AppCompatActivity {
         t6=(TextView)findViewById(R.id.fathername);
         mobile=(EditText)findViewById(R.id.mobile);
         il=(ImageView)findViewById(R.id.pic);
+        android.support.v7.app.ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         //inisializing variables
         auth=FirebaseAuth.getInstance();
@@ -178,5 +186,21 @@ public class profileStudent extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+//sets the back button
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        return true;
     }
 }

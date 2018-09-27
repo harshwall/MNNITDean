@@ -1,11 +1,14 @@
 package com.example.mnnit.mnnitdean;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -41,6 +44,9 @@ public class adminLogin extends AppCompatActivity {
         pass=(EditText)findViewById(R.id.pass);
         progressDialog=new ProgressDialog(this);
         button=(ImageButton)findViewById(R.id.hide);
+        //defining action bar for back button
+        android.support.v7.app.ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -113,4 +119,21 @@ public class adminLogin extends AppCompatActivity {
         }
 
     }
+    //sets the back button
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        return true;
+    }
+
 }

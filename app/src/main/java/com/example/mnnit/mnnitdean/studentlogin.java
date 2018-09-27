@@ -17,6 +17,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -76,7 +77,14 @@ public class studentlogin extends AppCompatActivity {
                                         startActivity(io);
                                         dialog.dismiss();
                                     }
-                                });
+                                })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+
                                 break;
                             case R.id.downloads:break;
                             case R.id.fee:

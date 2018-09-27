@@ -1,11 +1,16 @@
 package com.example.mnnit.mnnitdean;
 
+import android.app.ActionBar;
+import android.app.AppComponentFactory;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -29,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class signup extends Activity {
+public class signup extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference rootreference;
@@ -58,6 +63,9 @@ public class signup extends Activity {
 
         textView=(TextView)findViewById(R.id.text3);
         dob=(ImageButton)findViewById(R.id.dob);
+        android.support.v7.app.ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Sign Up");
 
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,5 +241,22 @@ public class signup extends Activity {
         }
 
     }
+    //sets the back button
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        return true;
+    }
+
 
 }

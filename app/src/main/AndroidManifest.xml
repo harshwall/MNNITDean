@@ -34,7 +34,8 @@
         <activity android:name=".profileStudent" />
         <activity android:name=".signupflag" />
         <activity android:name=".adminLogin" />
-        <activity android:name=".adminActivity"></activity>
+        <activity android:name=".adminActivity" />
+        <activity android:name=".upnotice"></activity>
     </application>
 
 </manifest>

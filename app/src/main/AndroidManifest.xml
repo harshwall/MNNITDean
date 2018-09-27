@@ -41,7 +41,8 @@
         <activity android:name=".upfees" />
         <activity android:name=".admnotice" />
         <activity android:name=".downstudent" />
-        <activity android:name=".downadmin"></activity>
+        <activity android:name=".downadmin" />
+        <activity android:name=".adminSetResult"></activity>
     </application>
 
 </manifest>

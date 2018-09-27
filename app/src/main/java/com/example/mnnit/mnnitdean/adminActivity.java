@@ -66,6 +66,10 @@ public class adminActivity extends AppCompatActivity {
                         Intent fee=new Intent(adminActivity.this,upfees.class);
                         startActivity(fee);
                         break;
+                    case R.id.setResult:
+                        Intent setResult=new Intent(adminActivity.this,adminSetResult.class);
+                        startActivity(setResult);
+                        break;
                     case R.id.signout:
                         auth.signOut();
                         finish();

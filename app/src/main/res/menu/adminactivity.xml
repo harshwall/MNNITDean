@@ -20,6 +20,9 @@
         android:id="@+id/fee"
         android:title="Upload Fee Structure"/>
     <item
+        android:id="@+id/setResult"
+        android:title="Set Result"/>
+    <item
         android:id="@+id/signout"
         android:title="Sign Out"/>
 

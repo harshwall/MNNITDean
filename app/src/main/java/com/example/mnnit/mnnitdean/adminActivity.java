@@ -43,14 +43,24 @@ public class adminActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
                 int id=menuItem.getItemId();
                 switch (id){
-                    case R.id.notice:break;
+                    case R.id.notice:
+                        break;
                     case R.id.up_notice:
                         Intent intent=new Intent(adminActivity.this,upnotice.class);
                         startActivity(intent);
                         break;
-                    case R.id.calendar:break;
-                    case R.id.downloads:break;
-                    case R.id.fee:break;
+                    case R.id.calendar:
+                        Intent no=new Intent(adminActivity.this,upacademic.class);
+                        startActivity(no);
+                        break;
+                    case R.id.downloads:
+                        Intent down=new Intent(adminActivity.this,updownloads.class);
+                        startActivity(down);
+                        break;
+                    case R.id.fee:
+                        Intent fee=new Intent(adminActivity.this,upfees.class);
+                        startActivity(fee);
+                        break;
                     case R.id.signout:
                         auth.signOut();
                         finish();

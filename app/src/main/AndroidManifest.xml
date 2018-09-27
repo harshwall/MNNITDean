@@ -35,7 +35,10 @@
         <activity android:name=".signupflag" />
         <activity android:name=".adminLogin" />
         <activity android:name=".adminActivity" />
-        <activity android:name=".upnotice"></activity>
+        <activity android:name=".upnotice" />
+        <activity android:name=".upacademic" />
+        <activity android:name=".updownloads" />
+        <activity android:name=".upfees"></activity>
     </application>
 
 </manifest>

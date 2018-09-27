@@ -51,7 +51,7 @@ public class upnotice extends AppCompatActivity {
         {
             pdfUri=data.getData();
             StorageReference myref=storageReference.child("abc"+".pdf");
-            dialog.setMessage("Uploading Image");
+            dialog.setMessage("Uploading File");
             dialog.show();
             myref.putFile(pdfUri)
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {

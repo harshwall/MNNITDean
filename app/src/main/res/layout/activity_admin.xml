@@ -8,12 +8,29 @@
     tools:context=".adminActivity"
     android:id="@+id/admindrawer">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Approve Request of new Students"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+
+
 <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/recycler">
 
 </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"

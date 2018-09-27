@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.mnnit.mnnitdean.studentlogin">
     <item
-        android:id="@+id/notice"
-        android:title="Notices" />
-    <item
         android:id="@+id/profile"
         android:title="Profile"/>
     <item

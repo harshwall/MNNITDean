@@ -44,9 +44,12 @@ public class adminLogin extends AppCompatActivity {
         pass=(EditText)findViewById(R.id.pass);
         progressDialog=new ProgressDialog(this);
         button=(ImageButton)findViewById(R.id.hide);
-        //defining action bar for back button
         android.support.v7.app.ActionBar actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        //defining action bar for back button
 
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override

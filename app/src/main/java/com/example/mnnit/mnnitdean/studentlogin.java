@@ -91,7 +91,6 @@ public class studentlogin extends AppCompatActivity {
                         menuItem.setChecked(false);
                         int id=menuItem.getItemId();
                         switch (id){
-                            case R.id.notice:break;
                             case R.id.profile:
                                 final Intent intent=new Intent(studentlogin.this,profileStudent.class);
                                 startActivity(intent);

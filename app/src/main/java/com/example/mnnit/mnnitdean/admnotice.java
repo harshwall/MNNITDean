@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -42,6 +44,11 @@ public class admnotice extends AppCompatActivity {
         prev=(Button)findViewById(R.id.prev);
         storageReference= FirebaseStorage.getInstance().getReference();
         databaseReference= FirebaseDatabase.getInstance().getReference();
+        android.support.v7.app.ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         dialog.show();
         databaseReference.child("Notice").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -104,4 +111,20 @@ public class admnotice extends AppCompatActivity {
 
     }
 
+    //sets the back button
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        return true;
+    }
 }

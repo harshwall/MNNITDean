@@ -19,13 +19,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class login extends Activity {
     FirebaseAuth auth;
     FirebaseUser user;
     EditText email,pass;
     ProgressDialog progressDialog;
+    DatabaseReference databaseReference;
     ImageButton button;
 
     @Override
@@ -33,11 +38,14 @@ public class login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         auth=FirebaseAuth.getInstance();
+        user=auth.getCurrentUser();
+        databaseReference=FirebaseDatabase.getInstance().getReference();
 
         email=(EditText)findViewById(R.id.email);
         pass=(EditText)findViewById(R.id.pass);
         progressDialog=new ProgressDialog(this);
         button=(ImageButton)findViewById(R.id.hide);
+
 
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -73,10 +81,40 @@ public class login extends Activity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-                                progressDialog.dismiss();
-                                finish();
-                                Intent intent=new Intent(login.this,studentlogin.class);
-                                startActivity(intent);
+                                databaseReference.child("Profile:/"+user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        user prin=dataSnapshot.getValue(user.class);
+                                        if(prin.flag.equals("-1"))
+                                        {
+                                            Toast.makeText(getApplicationContext(),"Admin has not yet approved your request",Toast.LENGTH_LONG).show();
+                                            progressDialog.dismiss();
+                                        }
+                                        else if(prin.flag.equals("0"))
+                                        {
+                                            progressDialog.dismiss();
+                                            Intent intent=new Intent(login.this,signupflag.class);
+                                            startActivity(intent);
+                                        }
+                                        else if(prin.flag.equals("1"))
+                                        {
+                                            progressDialog.dismiss();
+                                            Intent intent=new Intent(login.this,studentlogin.class);
+                                            startActivity(intent);
+                                        }
+                                        else
+                                        {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getApplicationContext(),"User not found...",Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
                             }
                             else
                             {

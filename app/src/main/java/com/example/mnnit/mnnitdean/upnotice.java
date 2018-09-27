@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -28,9 +33,11 @@ public class upnotice extends AppCompatActivity {
     StorageReference storageReference;
     FirebaseUser user;
     FirebaseAuth auth;
+    DatabaseReference databaseReference;
     ProgressDialog dialog;
     Uri pdfUri;
-    WebView webView;
+    int l;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +47,29 @@ public class upnotice extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         storageReference= FirebaseStorage.getInstance().getReference().child("Notice");
+        databaseReference=FirebaseDatabase.getInstance().getReference();
         dialog=new ProgressDialog(this);
-        webView=(WebView)findViewById(R.id.web);
-        webView.getSettings().setJavaScriptEnabled(true);
-        String pdf= "https://firebasestorage.googleapis.com/v0/b/mnnitdean-b7f65.appspot.com/o/AcademicCalander%2Facademiccalender.pdf?alt=media&token=3a1c081f-0cef-49d3-b1c0-3f4664499efc.pdf";
-        webView.loadUrl(pdf);
     }
 
 
     public void openGallery(View v) {
-        Intent i = new Intent();
-        i.setType("application/pdf");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(i, 10);
+        databaseReference.child("Notice").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                notice n=dataSnapshot.getValue(notice.class);
+                l=Integer.parseInt(n.notice);
+                l++;
+                Intent i = new Intent();
+                i.setType("application/pdf");
+                i.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(i, 10);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -61,7 +78,7 @@ public class upnotice extends AppCompatActivity {
         if(requestCode==10&&resultCode==RESULT_OK&&data!=null)
         {
             pdfUri=data.getData();
-            StorageReference myref=storageReference.child("abc"+".pdf");
+            StorageReference myref=storageReference.child(Integer.toString(l)+".pdf");
             dialog.setMessage("Uploading File");
             dialog.show();
             myref.putFile(pdfUri)
@@ -70,6 +87,7 @@ public class upnotice extends AppCompatActivity {
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             if(task.isSuccessful())
                             {
+                                databaseReference.child("Notice").child("notice").setValue(Integer.toString(l));
                                 dialog.dismiss();
                                 Toast.makeText(getApplicationContext(),"File Uploaded Successfully",Toast.LENGTH_LONG).show();
                             }

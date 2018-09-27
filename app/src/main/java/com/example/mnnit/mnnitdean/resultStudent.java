@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +34,10 @@ public class resultStudent extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         rootReference=FirebaseDatabase.getInstance().getReference();
         android.support.v7.app.ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         dialog=new ProgressDialog(this);
         dialog.setMessage("Please Wait");
         dialog.show();
@@ -92,5 +98,21 @@ public class resultStudent extends AppCompatActivity {
             }
         });
 
+    }
+    //sets the back button
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        return true;
     }
 }

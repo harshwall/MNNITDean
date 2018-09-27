@@ -3,6 +3,8 @@ package com.example.mnnit.mnnitdean;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +36,11 @@ public class adminSetResult extends AppCompatActivity {
         e7=(EditText)findViewById(R.id.eng);
         e8=(EditText)findViewById(R.id.eco);
         e9=(EditText)findViewById(R.id.comm);
+        android.support.v7.app.ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         search=(Button)findViewById(R.id.search);
         submit=(Button)findViewById(R.id.set);
         submit.setEnabled(false);
@@ -136,5 +143,21 @@ public class adminSetResult extends AppCompatActivity {
         else
             Toast.makeText(getApplicationContext(),"Marks exceed 100",Toast.LENGTH_SHORT).show();
 
+    }
+    //sets the back button
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        return true;
     }
 }

@@ -129,8 +129,6 @@ public class studentlogin extends AppCompatActivity {
                             case R.id.signout:
                                 auth.signOut();
                                 finish();
-                                Intent i=new Intent(studentlogin.this,loginType.class);
-                                startActivity(i);
                                 break;
                         }
 

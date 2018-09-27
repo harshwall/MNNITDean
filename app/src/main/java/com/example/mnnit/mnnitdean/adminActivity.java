@@ -66,8 +66,6 @@ public class adminActivity extends AppCompatActivity {
                     case R.id.signout:
                         auth.signOut();
                         finish();
-                        Intent i=new Intent(adminActivity.this,loginType.class);
-                        startActivity(i);
                         break;
                 }
 

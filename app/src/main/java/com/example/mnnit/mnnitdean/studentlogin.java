@@ -127,6 +127,10 @@ public class studentlogin extends AppCompatActivity {
                                     }
                                 });
                                 break;
+                            case R.id.result:
+                                Intent i=new Intent(studentlogin.this,resultStudent.class);
+                                startActivity(i);
+                                break;
                             case R.id.signout:
                                 auth.signOut();
                                 SharedPreferences sharedPreferences=getSharedPreferences("loginType",0);

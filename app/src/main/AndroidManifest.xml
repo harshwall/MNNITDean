@@ -42,7 +42,8 @@
         <activity android:name=".admnotice" />
         <activity android:name=".downstudent" />
         <activity android:name=".downadmin" />
-        <activity android:name=".adminSetResult"></activity>
+        <activity android:name=".adminSetResult" />
+        <activity android:name=".resultStudent"></activity>
     </application>
 
 </manifest>

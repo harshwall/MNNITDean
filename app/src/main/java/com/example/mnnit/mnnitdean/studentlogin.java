@@ -15,13 +15,22 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.w3c.dom.Text;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,11 +40,13 @@ public class studentlogin extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    WebView webView;
     StorageReference storageReference;
+    DatabaseReference databaseReference;
     URL s;
-    Uri sak;
     ProgressDialog dialog;
+    int notice,currNotice;
+    TextView t1;
+    Button next,prev;
 
 
     FirebaseAuth auth;
@@ -47,9 +58,28 @@ public class studentlogin extends AppCompatActivity {
         dialog=new ProgressDialog(this);
         dialog.setMessage("Please Wait...");
         auth=FirebaseAuth.getInstance();
-        webView=(WebView)findViewById(R.id.webView);
-        webView.getSettings().setJavaScriptEnabled(true);
+        t1=(TextView)findViewById(R.id.no);
+        next=(Button)findViewById(R.id.next);
+        prev=(Button)findViewById(R.id.prev);
         storageReference= FirebaseStorage.getInstance().getReference();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+        dialog.show();
+        databaseReference.child("Notice").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                notice n=dataSnapshot.getValue(notice.class);
+                notice=Integer.parseInt(n.notice);
+                currNotice=notice;
+                t1.setText("The current notice number is: "+currNotice);
+                prev.setEnabled(false);
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
         NavigationView navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -77,13 +107,7 @@ public class studentlogin extends AppCompatActivity {
                                         startActivity(io);
                                         dialog.dismiss();
                                     }
-                                })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                dialog.dismiss();
-                                            }
-                                        });
+                                });
 
                                 break;
                             case R.id.downloads:break;
@@ -120,7 +144,7 @@ public class studentlogin extends AppCompatActivity {
 
 
     }
-
+//pop up back press for sign out
     @Override
     public void onBackPressed()
     {
@@ -144,7 +168,7 @@ public class studentlogin extends AppCompatActivity {
         alert.setTitle("Dialog Header");
         alert.show();
     }
-
+//for drawer toggle
     public boolean onOptionsItemSelected(MenuItem item)
     {
         if(mToggle.onOptionsItemSelected(item)){
@@ -152,5 +176,47 @@ public class studentlogin extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    //button press
+    public void nextPress(View v){
+        if(currNotice>1)
+        {
+            currNotice--;
+            if(currNotice<notice)
+                prev.setEnabled(true);
+            if(currNotice==1)
+                next.setEnabled(false);
+        }
+        t1.setText("The current notice number is: "+currNotice);
 
+
+
+    }
+    public void prevPress(View v){
+        if(currNotice<notice)
+        {
+            currNotice++;
+            if(currNotice==notice)
+                prev.setEnabled(false);
+            if(currNotice>1)
+                next.setEnabled(true);
+
+        }
+        t1.setText("The current notice number is: "+currNotice);
+
+    }
+
+    public void fetch(View v){
+        dialog.show();
+        storageReference.child("Notice/"+currNotice+".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Intent io=new Intent(Intent.ACTION_VIEW);
+                io.setDataAndType(uri,"application/pdf");
+                io.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(io);
+                dialog.dismiss();
+            }
+        });
+
+    }
 }

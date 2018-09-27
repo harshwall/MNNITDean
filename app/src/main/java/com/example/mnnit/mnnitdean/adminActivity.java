@@ -44,6 +44,8 @@ public class adminActivity extends AppCompatActivity {
                 int id=menuItem.getItemId();
                 switch (id){
                     case R.id.notice:
+                        Intent admnot=new Intent(adminActivity.this,admnotice.class);
+                        startActivity(admnot);
                         break;
                     case R.id.up_notice:
                         Intent intent=new Intent(adminActivity.this,upnotice.class);

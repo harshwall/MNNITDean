@@ -38,7 +38,8 @@
         <activity android:name=".upnotice" />
         <activity android:name=".upacademic" />
         <activity android:name=".updownloads" />
-        <activity android:name=".upfees"></activity>
+        <activity android:name=".upfees" />
+        <activity android:name=".admnotice"></activity>
     </application>
 
 </manifest>

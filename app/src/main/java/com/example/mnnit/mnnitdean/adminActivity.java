@@ -56,7 +56,7 @@ public class adminActivity extends AppCompatActivity {
                         startActivity(no);
                         break;
                     case R.id.downloads:
-                        Intent down=new Intent(adminActivity.this,updownloads.class);
+                        Intent down=new Intent(adminActivity.this,downadmin.class);
                         startActivity(down);
                         break;
                     case R.id.fee:

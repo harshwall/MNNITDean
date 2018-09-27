@@ -39,7 +39,9 @@
         <activity android:name=".upacademic" />
         <activity android:name=".updownloads" />
         <activity android:name=".upfees" />
-        <activity android:name=".admnotice"></activity>
+        <activity android:name=".admnotice" />
+        <activity android:name=".downstudent" />
+        <activity android:name=".downadmin"></activity>
     </application>
 
 </manifest>

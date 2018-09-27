@@ -110,7 +110,10 @@ public class studentlogin extends AppCompatActivity {
                                 });
 
                                 break;
-                            case R.id.downloads:break;
+                            case R.id.downloads:
+                                Intent dow=new Intent(studentlogin.this,downstudent.class);
+                                startActivity(dow);
+                                break;
                             case R.id.fee:
                                 dialog.show();
                                 storageReference.child("Fees/fees.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

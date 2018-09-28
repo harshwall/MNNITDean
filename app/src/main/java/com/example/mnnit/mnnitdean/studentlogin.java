@@ -64,10 +64,10 @@ public class studentlogin extends AppCompatActivity {
         prev=(Button)findViewById(R.id.prev);
         storageReference= FirebaseStorage.getInstance().getReference();
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        dialog.show();
-        databaseReference.child("Notice").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Notice").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dialog.show();
                 notice n=dataSnapshot.getValue(notice.class);
                 notice=Integer.parseInt(n.notice);
                 currNotice=notice;

@@ -2,6 +2,7 @@ package com.example.mnnit.mnnitdean;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -72,7 +73,12 @@ public class adminActivity extends AppCompatActivity {
                         break;
                     case R.id.signout:
                         auth.signOut();
-                        finish();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            finishAffinity();
+                        }
+                        else
+                            finish();
+                        System.exit(0);
                         break;
                 }
 
@@ -84,13 +90,13 @@ public class adminActivity extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        arrayList=new ArrayList<user>();
         recyclerView=(RecyclerView)findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         rootreference= FirebaseDatabase.getInstance().getReference();
-        rootreference.child("Profile:").addListenerForSingleValueEvent(new ValueEventListener() {
+        rootreference.child("Profile:").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList=new ArrayList<user>();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren())
                 {
 

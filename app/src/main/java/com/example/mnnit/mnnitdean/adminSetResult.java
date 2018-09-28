@@ -98,7 +98,6 @@ public class adminSetResult extends AppCompatActivity {
                             cnt1++;
                             if(cnt1==cnt2)
                             {
-                                Toast.makeText(getApplicationContext(),"Student not found",Toast.LENGTH_SHORT).show();
                                 submit.setEnabled(false);
                                 cnt1=1;
                                 cnt2=0;
@@ -111,7 +110,7 @@ public class adminSetResult extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(getApplicationContext(),"Student not found",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
 
                 }
             });

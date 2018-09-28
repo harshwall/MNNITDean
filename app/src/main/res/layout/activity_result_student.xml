@@ -224,11 +224,13 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center"/>
         <com.jjoe64.graphview.GraphView
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_width="350dp"
+            android:layout_height="270dp"
             android:padding="10dp"
             android:id="@+id/graph"
-            app:seriesType="line"/>
+            app:seriesType="line"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"/>
 
 
 

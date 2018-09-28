@@ -2,6 +2,7 @@ package com.example.mnnit.mnnitdean;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,8 @@ public class resultStudent extends AppCompatActivity {
     TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10;
     ProgressDialog dialog;
     GraphView graphView;
-    int spi1,spi2;
+    int spi1=0,spi2=0;
+    LineGraphSeries<DataPoint> series;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,6 @@ public class resultStudent extends AppCompatActivity {
         }
         dialog=new ProgressDialog(this);
         dialog.setMessage("Please Wait");
-        dialog.show();
         t1=(TextView)findViewById(R.id.maths);
         t2=(TextView)findViewById(R.id.phy);
         t3=(TextView)findViewById(R.id.chem);
@@ -52,9 +53,18 @@ public class resultStudent extends AppCompatActivity {
         t9=(TextView)findViewById(R.id.spi1);
         t10=(TextView)findViewById(R.id.spi2);
         graphView=(GraphView)findViewById(R.id.graph);
-        rootReference.child("Result/Result1:/"+auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//        series=new LineGraphSeries<DataPoint>(
+//                new DataPoint[]{
+//                        new DataPoint(1,spi1),
+//                        new DataPoint(2,spi2)
+//                }
+//        );
+        series=new LineGraphSeries<>(generate());
+        graphView.addSeries(series);
+        rootReference.child("Result/Result1:/"+auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dialog.show();
                 result1 r1=dataSnapshot.getValue(result1.class);
                 t1.setText(r1.maths);
                 t2.setText(r1.physics);
@@ -63,7 +73,7 @@ public class resultStudent extends AppCompatActivity {
                 spi1=(int)((Integer.parseInt(r1.maths)*4+Integer.parseInt(r1.workshop)*2+Integer.parseInt(r1.chemistry)*3+Integer.parseInt(r1.physics)*4)/13);
                 String s=Integer.toString(spi1);
                 t9.setText("Average Marks: "+s);
-                rootReference.child("Result/Result2:/"+auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                rootReference.child("Result/Result2:/"+auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         result2 r2=dataSnapshot.getValue(result2.class);
@@ -74,13 +84,7 @@ public class resultStudent extends AppCompatActivity {
                         spi2=(int)(Integer.parseInt(r2.mechanics)*4+Integer.parseInt(r2.ecology)*2+Integer.parseInt(r2.english)*3+Integer.parseInt(r2.communication)*2)/11;
                         String l=Integer.toString(spi2);
                         t10.setText("Average Marks: "+l);
-                        LineGraphSeries<DataPoint> series=new LineGraphSeries<DataPoint>(
-                                new DataPoint[]{
-                                        new DataPoint(1,spi1),
-                                        new DataPoint(2,spi2)
-                                }
-                        );
-                        graphView.addSeries(series);
+                        series.resetData(generate());
                         dialog.dismiss();
                     }
 
@@ -98,6 +102,14 @@ public class resultStudent extends AppCompatActivity {
             }
         });
 
+    }
+    public DataPoint[] generate(){
+        DataPoint[] values=new DataPoint[2];
+        DataPoint v=new DataPoint(1,spi1);
+        DataPoint w=new DataPoint(2,spi2);
+        values[0]=v;
+        values[1]=w;
+        return values;
     }
     //sets the back button
     public boolean onOptionsItemSelected(MenuItem item)

@@ -5,9 +5,9 @@ This is the application version of the MNNIT Dean Portal which hosts data of all
 #### Admin Login
 
 Admin can login to access the database in a user friendly way to 
-* add/update results
-* upload new notices
-* update downloads section.
+* Add/update results
+* Upload new notices
+* Update downloads section.
 
 #### Student login
 
